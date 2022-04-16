@@ -1,0 +1,148 @@
+.full_height {
+    height: 100%;
+    text-align: center;
+    font-size: 25px;
+    background: rgb(82,78,144);
+    background: linear-gradient(53deg, rgba(82,78,144,1) 0%, rgba(71,145,59,1) 63%, rgba(56,76,80,1) 100%);
+}
+
+.logo {
+    display: inline-block;
+    filter: drop-shadow(20px 30px 5px rgb(0, 0, 0, 0.4));
+}
+
+.logo > img {
+    margin-top: 35%;
+    max-width: 300px;
+    padding-bottom: 10px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+#top-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    display: flex;
+}
+
+#lang {
+    display: flex;
+}
+
+.lang-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    opacity: 0.6;
+    letter-spacing: 2px;
+}
+
+.lang-button:hover {
+    opacity: 0.8;
+}
+
+.selected {
+    opacity: 1;
+}
+
+#slash {
+    font-size: 22px;
+    color: white;
+    margin: 0 10px;
+}
+
+.help-frame {
+    padding: 20px 1% 20px;
+}
+
+.help-text {
+    text-align: left;
+    font-size: 24px;
+}
+
+#help-cards-gallery {
+    text-align: center;
+}
+
+.gallery-card {
+    width: 9.6%;
+    margin: 0 1px;
+}
+
+#help-cards-tooltips {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+}
+
+.gallery-card-tooltip {
+    width: 9.6%;
+    margin: 0 1px;
+}
+
+#close-modal {
+    position: fixed;
+    top: 80px;
+    right: 90px;
+    cursor: pointer;
+}
+
+.modal-overlay {
+    /* default react-modal values: */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: rgba(255, 255, 255, 0.75); */
+
+    /* custom values: */
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.modal-content {
+    /* default react-modal values: */
+    position: absolute;
+    /* top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px; */
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+
+    /* custom values: */
+
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    letter-spacing: 1px;
+}
+
+#close-image {
+    height: 32px;
+    width: 32px;
+}
+.inline-arrow {
+    display: inline-block;
+    cursor: pointer;
+}

@@ -1,0 +1,340 @@
+.board {
+  display: inline-grid;
+  grid-template-columns: [left-edge] 2fr [line2] 1fr [line3] 1fr [right-edge];
+  grid-template-rows: [top-edge] 1fr [line2] 1fr [line3] 1fr [bottom-edge];
+  grid-template-areas:
+    "villain-hand villain-hand villain-hand"
+    "battleground battleground community-cards"
+    "hero-hand hero-hand hero-hand";
+  justify-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.villain-hand {
+  grid-area: villain-hand;
+  display: flex;
+  margin-top: -27vh;
+}
+
+.battleground {
+  grid-area: battleground;
+  justify-self: left;
+  margin-left: 52%;
+}
+
+/* Show nothing but the live card if it's played before the
+  cards from the previous trick dissapear from the table */
+
+.battleground > img {
+  display: none;
+}
+
+.battleground > .liveCards:last-child,
+.battleground > .prevCards,
+.battleground > .blank {
+  display: inline;
+}
+
+.community-cards {
+  grid-area: community-cards;
+  padding-bottom: 3vh;
+  position: relative;
+}
+
+/* turn indicator */
+
+@keyframes indicator-hero-turn {
+  0% {
+    filter: grayscale(1);
+  }
+  100% {
+    filter: grayscale(0);
+  }
+}
+
+@keyframes indicator-villain-turn {
+  0% {
+    filter: grayscale(0);
+  }
+  100% {
+    filter: grayscale(1);
+  }
+}
+
+/* trick winner animation */
+
+@keyframes hero-won {
+  0% {filter: drop-shadow(6px -4px 1px rgb(0, 0, 0, 0.8))}
+  100% {filter: drop-shadow(0 0 12px rgb(0,255,0))}
+}
+
+@keyframes villain-won {
+  0% {filter: drop-shadow(6px -4px 1px rgb(0, 0, 0, 0.8))}
+  100% {filter: drop-shadow(0 0 12px rgb(220,20,60))}
+}
+
+.hero-won {
+  animation-name: hero-won;
+  animation-delay: 1s;
+  animation-duration: 1.5s;
+}
+
+.villain-won {
+  animation-name: villain-won;
+  animation-delay: 1s;
+  animation-duration: 1.5s;
+}
+
+.hero-hand {
+  grid-area: hero-hand;
+  display: flex;
+  font-size: 40px;
+  filter: grayscale(1);
+  animation-name: indicator-villain-turn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+.hero-hand-green {
+  grid-area: hero-hand;
+  display: flex;
+  font-size: 40px;
+  animation-name: indicator-hero-turn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+/* Playing cards*/
+
+.hero-playing-card {
+  max-height: 38vh;
+}
+
+/* card-wrapper neccessary for drop-shadow to not cause blurring of the card images */
+
+.card-wrapper {
+  filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));
+}
+
+.villain-playing-card {
+  max-height: 38vh;
+  filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));
+}
+
+.briscola-playing-card {
+  max-height: 35vh;
+  filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));
+}
+
+.middle-playing-card {
+  max-height: 35vh;
+  filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));
+  margin: 0px 5px;
+}
+
+button {
+  font-family: "Cairo", Georgia, sans-serif;
+}
+
+.villain-hand-game-over {
+  max-height: 200px;
+  grid-area: villain-hand;
+  display: flex;
+  margin-top: 200px;
+  font-size: 34px;
+}
+
+/* Hero */
+/* 1 or 3 cards */
+
+#hero-other-cards > div:nth-child(1) > div {
+  transform: rotate(-9deg) translateX(25px);
+}
+
+#hero-other-cards > div:nth-child(3) > div {
+  transform: rotate(9deg) translateX(-25px);
+}
+
+#hero-other-cards > div:nth-child(2) > div {
+  transform: translateY(-25px);
+}
+
+#hero-other-cards > div:only-of-type > div {
+  transform: rotate(0deg);
+}
+
+/* 2 cards */
+
+#hero-two-cards > div:first-child > div {
+  transform: rotate(-9deg) translateX(12px);
+}
+
+#hero-two-cards > div:last-child > div {
+  transform: rotate(9deg) translateX(-12px);
+}
+
+/* Villain */
+/* 1 or 3 cards */
+
+#villain-other-cards div:nth-child(1) {
+  transform: rotate(-9deg) translateX(25px);
+}
+
+#villain-other-cards div:nth-child(3) {
+  transform: rotate(9deg) translateX(-25px);
+}
+
+#villain-other-cards div:nth-child(2) {
+  transform: translateY(-25px);
+}
+#villain-other-cards div:only-of-type {
+  transform: rotate(0deg);
+}
+
+/* 2 cards */
+
+#villain-two-cards div:first-child {
+  transform: rotate(-9deg) translateX(12px);
+}
+
+#villain-two-cards div:last-child {
+  transform: rotate(9deg) translateX(-12px);
+}
+
+/* card coming from the deck */
+
+#wrapped-card-3,
+#villain-wrapped-card-3 {
+  transform: translateX(150px);
+}
+
+.deck-card {
+  position: absolute;
+  top: 13vh;
+  right: -9vh;
+  max-height: 38vh;
+  transform: rotate(90deg);
+  filter: drop-shadow(-6px -8px 1px rgb(0, 0, 0, 0.8));
+}
+
+#ingame-help {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+#previous-trick {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  cursor: default;
+}
+
+#previous-trick-tooltip {
+  visibility: hidden;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: black;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.previous-card {
+  max-height: 30vh;
+  margin: 5px;
+}
+
+/* Toggle between a visible button and a visible tooltip */
+
+#previous-trick:hover #previous-trick-tooltip {
+  visibility: visible;
+}
+
+#previous-trick:hover {
+  visibility: hidden;
+}
+
+[src=""] {
+  visibility: hidden;
+}
+
+/* making sure the game over message doesn't just pop out of nowhere */
+
+@keyframes gameover-info {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.ease-in {
+  animation-name: gameover-info;
+  animation-duration: 1s;
+}
+
+#chat {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  bottom: 20px;
+  left: 20px;
+  width: 25%;
+  height: 35%;
+}
+
+#chat-bottom {
+  margin-top: auto;
+  display: flex;
+  min-height: 35px;
+}
+
+#chat-top {
+  position: fixed;
+  bottom: 60px;
+  left: 25px;
+  width: 25%;
+}
+
+#enter-message {
+  width: 85%;
+  outline: none;
+  background: rgba(0, 0, 0, 0);
+  color: #e0ffff;
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+#enter-message::placeholder {
+  color: #e0ffff;
+}
+
+#enter-message:focus::placeholder {
+  color: transparent;
+}
+
+.message-wrapper {
+  display: flex;
+}
+
+.sender, .message-content {
+  margin: 0;
+}
+
+.sender {
+  font-weight: 900;
+}
+
+.message-content {
+  padding-left: 5px;
+  font-weight: 500;
+}
+
+.hero-message {
+  color: #e0ffff;
+}
+
+.villain-message {
+  color: #ffdead;
+}
