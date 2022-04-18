@@ -1,7 +1,7 @@
 .board {
   display: inline-grid;
-  grid-template-columns: [left-edge] 2fr [line2] 1fr [line3] 1fr [right-edge];
-  grid-template-rows: [top-edge] 1fr [line2] 1fr [line3] 1fr [bottom-edge];
+  grid-template-columns: [left-edge] 1fr [line2] 2fr [line3] 1fr [right-edge];
+  grid-template-rows: [top-edge] 1fr [line2] 2fr [line3] 1fr [bottom-edge];
   grid-template-areas:
     "villain-hand villain-hand villain-hand"
     "battleground battleground community-cards"
@@ -109,13 +109,22 @@
 /* Playing cards*/
 
 .hero-playing-card {
-  max-height: 38vh;
+  max-height: 5em;
+  border-radius: 0.05em;
+  box-shadow: 0 0 0 0.2em #fff,
+              0 0 0 0.22em #9a9a9a;
 }
 
-/* card-wrapper neccessary for drop-shadow to not cause blurring of the card images */
+.hero-playing-card:hover {
+  box-shadow: 0 0 0 0.2em #fff,
+              0 0 0 0.25em #fffb11;
+}
+
+/* card-wrapper necessary for drop-shadow to not cause blurring of the card images */
 
 .card-wrapper {
   filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));
+  margin-left: -1.2em;
 }
 
 .villain-playing-card {
@@ -167,13 +176,13 @@ button {
 
 /* 2 cards */
 
-#hero-two-cards > div:first-child > div {
-  transform: rotate(-9deg) translateX(12px);
-}
+/*#hero-two-cards > div:first-child > div {*/
+/*  transform: rotate(-9deg) translateX(12px);*/
+/*}*/
 
-#hero-two-cards > div:last-child > div {
-  transform: rotate(9deg) translateX(-12px);
-}
+/*#hero-two-cards > div:last-child > div {*/
+/*  transform: rotate(9deg) translateX(-12px);*/
+/*}*/
 
 /* Villain */
 /* 1 or 3 cards */
@@ -205,10 +214,10 @@ button {
 
 /* card coming from the deck */
 
-#wrapped-card-3,
-#villain-wrapped-card-3 {
-  transform: translateX(150px);
-}
+/*#wrapped-card-3,*/
+/*#villain-wrapped-card-3 {*/
+/*  transform: translateX(150px);*/
+/*}*/
 
 .deck-card {
   position: absolute;
