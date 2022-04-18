@@ -8,10 +8,13 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
-    <React.StrictMode>
+    // Comment strict mode since it doesn't work with current version of boardgame.io
+    // https://github.com/boardgameio/boardgame.io/issues/1068
+    // <React.StrictMode>
         <App />
-    </React.StrictMode>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

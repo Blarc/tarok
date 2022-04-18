@@ -11,6 +11,7 @@ export enum CardType {
 }
 
 export interface ICard {
+    id: string;
     type: CardType;
     color: CardColor | undefined;
     strength: number;

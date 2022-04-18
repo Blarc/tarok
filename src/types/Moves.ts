@@ -1,4 +1,3 @@
 export interface Moves {
-    rollDice: () => void;
-    toggleDie: (die: number) => void;
+    playCard: (cardId: number) => void;
 }

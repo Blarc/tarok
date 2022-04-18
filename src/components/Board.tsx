@@ -1,42 +1,24 @@
 import React, { FunctionComponent} from "react";
-import {Client, BoardProps} from "boardgame.io/react";
-import {Tarok, GameState} from "../game/Tarok";
-import {Local} from "boardgame.io/multiplayer";
-import {Debug} from "boardgame.io/debug";
+import {BoardProps} from "boardgame.io/react";
+import {GameState} from "../game/Tarok";
 import Player from "./Player";
 import '../styles/board.css';
+import Middle from "./Middle";
 
 interface IBoardProps extends BoardProps<GameState> {}
 
-export const renderBoard = ({ G, ctx, moves } : IBoardProps) =>  {
-
-    for (let player in G.players) {
-        console.log(player)
-    }
+const Board: FunctionComponent<IBoardProps> = ({ playerID, G, ctx, moves } : IBoardProps) =>  {
 
     return (
         <div className="board">
-            <Player demo="false" gameData={{turn: G.turn, players: G.players}}  />
+            <Player
+                demo="false"
+                gameData={G}
+                moves={moves}
+                playerId={parseInt(playerID!)}
+            />
+            <Middle gameData={G}/>
         </div>
-    )
-}
-
-export interface IBoardComponentProps {
-    playerID: string;
-    demo: string;
-}
-
-const Board: FunctionComponent<IBoardComponentProps> = (props) => {
-
-    const TarokClient = Client({
-        game: Tarok,
-        board: renderBoard,
-        multiplayer: Local(),
-        debug: { impl: Debug }
-    });
-
-    return (
-        <TarokClient />
     )
 }
 
