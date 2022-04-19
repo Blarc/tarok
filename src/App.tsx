@@ -11,7 +11,7 @@ import {Debug} from "boardgame.io/debug";
 const App : FunctionComponent = () => {
 
     const TarokClient = Client({
-        game: Tarok(4),
+        game: Tarok,
         board: Board,
         numPlayers: 4,
         multiplayer: Local(),

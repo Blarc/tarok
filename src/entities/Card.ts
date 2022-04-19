@@ -1,9 +1,9 @@
 
 export enum CardColor {
-    HEART = 'heart',
+    SPADE = 'spade',
     DIAMOND = 'diamond',
     CLUB = 'club',
-    SPADE = 'spade'
+    HEART = 'heart'
 }
 export enum CardType {
     COLOR,
@@ -18,33 +18,8 @@ export interface ICard {
     points: number;
     imgPath: string;
     alt: string;
+    sortNumber: number;
 }
-
-// export class Card {
-//     type: CardType;
-//     color: CardColor | undefined;
-//     strength: number;
-//     points: number;
-//     imgPath: string;
-//     alt: string;
-//
-//     constructor(
-//         type: CardType,
-//         color: CardColor,
-//         strength: number,
-//         points: number,
-//         imgPath: string,
-//         alt: string
-//     ) {
-//         this.type = type;
-//         this.color = color;
-//         this.strength = strength;
-//         this.points = points;
-//         this.imgPath = imgPath;
-//         this.alt = alt;
-//     }
-// }
-
 
 
 

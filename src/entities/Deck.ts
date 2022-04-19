@@ -1,5 +1,4 @@
 import {CardColor, CardType, ICard} from "./Card";
-import arrayShuffle from "array-shuffle";
 
 const deck: ICard[] = []
 
@@ -14,6 +13,7 @@ const colorNamesPoints: { [key: string]: number} = {
     'King': 5
 }
 
+let colorIndex = 0;
 for (let color in CardColor) {
     let strength = 1;
     for (let colorName in colorNamesPoints) {
@@ -24,10 +24,12 @@ for (let color in CardColor) {
             strength: strength,
             points: colorNamesPoints[colorName],
             imgPath: `/images/cards/${color}_${strength}.webp`,
-            alt: `${color}_${strength}`
+            alt: `${color}_${strength}`,
+            sortNumber: colorIndex * 10 + strength
         })
         strength += 1
     }
+    colorIndex += 1
 }
 
 for (let i = 1; i < 23; i++) {
@@ -40,7 +42,8 @@ for (let i = 1; i < 23; i++) {
             strength: i,
             points: 5,
             imgPath: `/images/cards/tarok_${i}.webp`,
-            alt: `tarok_${i}`
+            alt: `tarok_${i}`,
+            sortNumber: 100 + i
         })
     }
     else {
@@ -51,10 +54,10 @@ for (let i = 1; i < 23; i++) {
             strength: i,
             points: 0,
             imgPath: `/images/cards/tarok_${i}.webp`,
-            alt: `tarok_${i}`
+            alt: `tarok_${i}`,
+            sortNumber: 100 + i
         })
     }
 }
 
-const shuffledDeck: (() => ICard[]) = (() => arrayShuffle(deck))
-export { deck, shuffledDeck };
+export { deck };

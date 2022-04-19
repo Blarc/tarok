@@ -1,4 +1,4 @@
-import {FunctionComponent, useState} from "react";
+import {FunctionComponent} from "react";
 import {animated, useTransition} from 'react-spring';
 import {GameState} from "../game/Tarok";
 import {ICard} from "../entities/Card";
@@ -28,7 +28,7 @@ const Player: FunctionComponent<IPlayerProps> = props => {
     return (
         <>
             <div
-                className='hero-hand-green'
+                className='bottom'
                 id='hero-two-cards'
             >
             {

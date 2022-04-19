@@ -1,8 +1,9 @@
 import {Game} from "boardgame.io";
 import {IPlayer} from "../entities/Player";
 import {ICard} from "../entities/Card";
-import {shuffledDeck} from "../entities/Deck";
+import {deck} from "../entities/Deck";
 import {TurnOrder} from "boardgame.io/core";
+import middle from "../components/Middle";
 
 export interface GameState {
     turn: number;
@@ -12,13 +13,13 @@ export interface GameState {
     firstThrower: number;
 }
 
-export const Tarok: ((numberOfPlayers: number) => Game<GameState>) = ((numberOfPlayers) => ({
+export const Tarok: Game<GameState> = {
     name: 'Tarok',
 
-    setup: () => ({
+    setup: (ctx) => ({
         turn: 0,
         players: [],
-        middle: [],
+        middle: Array(ctx.numPlayers),
         talon: [],
         firstThrower: 0
     }),
@@ -27,13 +28,16 @@ export const Tarok: ((numberOfPlayers: number) => Game<GameState>) = ((numberOfP
         draw: {
             moves: {},
             onBegin: (G, ctx) => {
-                const deck = shuffledDeck();
-                G.talon = deck.splice(0, 6);
-                const numberOfCards = deck.length
+                const shuffledDeck = ctx.random?.Shuffle(deck);
+                G.talon = shuffledDeck!.splice(0, 6);
+                const numberOfCards = shuffledDeck!.length
 
-                for (let i = 0; i < numberOfPlayers; i++) {
+                for (let i = 0; i < ctx.numPlayers; i++) {
                     G.players[i] = {
-                        cards: deck.splice(0, numberOfCards / numberOfPlayers),
+                        cards: shuffledDeck!
+                            .splice(0, numberOfCards / ctx.numPlayers)
+                            .sort((a, b) => a.sortNumber > b.sortNumber ? -1 : 1)
+                        ,
                         points: [0]
                     }
                 }
@@ -41,8 +45,11 @@ export const Tarok: ((numberOfPlayers: number) => Game<GameState>) = ((numberOfP
             },
 
             next: 'play',
-            start: true,
-            endIf: G => G.players[0] && G.players[0].cards.length === 0,
+            start: true
+        },
+
+        gameSelection: {
+            moves: {},
         },
 
         play: {
@@ -55,9 +62,9 @@ export const Tarok: ((numberOfPlayers: number) => Game<GameState>) = ((numberOfP
                     console.log(playerID)
                     let currentPlayer: IPlayer = G.players[playerID];
                     currentPlayer.cards.splice(index, 1);
-                    G.middle.push(card);
+                    G.middle[playerID] = card;
                     console.log('playCard');
-                    ctx.events?.endTurn();
+                    // ctx.events?.endTurn();
 
                 }
             },
@@ -78,4 +85,4 @@ export const Tarok: ((numberOfPlayers: number) => Game<GameState>) = ((numberOfP
     },
     minPlayers: 3,
     maxPlayers: 4,
-}))
+}

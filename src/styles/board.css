@@ -3,44 +3,74 @@
   grid-template-columns: [left-edge] 1fr [line2] 2fr [line3] 1fr [right-edge];
   grid-template-rows: [top-edge] 1fr [line2] 2fr [line3] 1fr [bottom-edge];
   grid-template-areas:
-    "villain-hand villain-hand villain-hand"
-    "battleground battleground community-cards"
-    "hero-hand hero-hand hero-hand";
+    "top-left top top-right"
+    "center-left center center-right"
+    "bottom-left bottom bottom-right";
   justify-items: center;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 
-.villain-hand {
-  grid-area: villain-hand;
+/* board areas */
+
+/* bottom */
+.bottom-disabled {
+  grid-area: bottom;
   display: flex;
-  margin-top: -27vh;
+  font-size: 40px;
+  filter: grayscale(1);
+  animation-name: indicator-villain-turn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
 }
 
-.battleground {
-  grid-area: battleground;
-  justify-self: left;
-  margin-left: 52%;
+.bottom {
+  grid-area: bottom;
+  display: flex;
+  font-size: 40px;
+  animation-name: indicator-hero-turn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+/* center-left */
+.center-left {
+  grid-area: center-left;
+}
+
+/* center-right */
+.center-right {
+  grid-area: center-right;
+  position: relative;
+}
+
+/* top */
+
+.top {
+  grid-area: top;
+  /*display: flex;*/
+  /*margin-top: -27vh;*/
+}
+
+/* center */
+.center {
+  grid-area: center;
+  justify-self: center;
+  /*margin-left: 52%;*/
 }
 
 /* Show nothing but the live card if it's played before the
   cards from the previous trick dissapear from the table */
 
-.battleground > img {
+.center > img {
   display: none;
 }
 
-.battleground > .liveCards:last-child,
-.battleground > .prevCards,
-.battleground > .blank {
+.center > .liveCards:last-child,
+.center > .prevCards,
+.center > .blank {
   display: inline;
-}
-
-.community-cards {
-  grid-area: community-cards;
-  padding-bottom: 3vh;
-  position: relative;
 }
 
 /* turn indicator */
@@ -87,26 +117,13 @@
   animation-duration: 1.5s;
 }
 
-.hero-hand {
-  grid-area: hero-hand;
-  display: flex;
-  font-size: 40px;
-  filter: grayscale(1);
-  animation-name: indicator-villain-turn;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
+/* Other players */
+
+.other-player-left {
+
 }
 
-.hero-hand-green {
-  grid-area: hero-hand;
-  display: flex;
-  font-size: 40px;
-  animation-name: indicator-hero-turn;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-}
-
-/* Playing cards*/
+/* Playing cards */
 
 .hero-playing-card {
   max-height: 5em;
@@ -127,18 +144,21 @@
   margin-left: -1.2em;
 }
 
-.villain-playing-card {
-  max-height: 38vh;
-  filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));
-}
+/*.villain-playing-card {*/
+/*  max-height: 38vh;*/
+/*  filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));*/
+/*}*/
 
-.briscola-playing-card {
-  max-height: 35vh;
-  filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));
-}
+/*.briscola-playing-card {*/
+/*  max-height: 35vh;*/
+/*  filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));*/
+/*}*/
 
 .middle-playing-card {
   max-height: 35vh;
+  border-radius: 1em;
+  box-shadow: 0 0 0 0.2em #fff,
+              0 0 0 0.22em #9a9a9a;
   filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));
   margin: 0px 5px;
 }
@@ -147,9 +167,9 @@ button {
   font-family: "Cairo", Georgia, sans-serif;
 }
 
-.villain-hand-game-over {
+.top-game-over {
   max-height: 200px;
-  grid-area: villain-hand;
+  grid-area: top;
   display: flex;
   margin-top: 200px;
   font-size: 34px;
