@@ -22,35 +22,34 @@ const Middle: FunctionComponent<IMiddle> = props => {
             // leave: {opacity: number, transform: string},
         }} = {
         'bottom': {
-            from: { opacity: 0, transform: 'translate3d(0, 300px, 0)' },
-            enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+            from: { opacity: 0, transform: 'translate3d(0, 24em, 0) rotate(210deg)' },
+            enter: { opacity: 1, transform: 'translate3d(0, 16em, 0) rotate(5deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         },
         'center-left': {
-            from: { opacity: 0, transform: 'translate3d(-100px, 0, 0)' },
-            enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+            from: { opacity: 0, transform: 'translate3d(50em, 12em, 0) rotate(0deg)' },
+            enter: { opacity: 1, transform: 'translate3d(6em, 12em, 0) rotate(95deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         },
         'top': {
-            from: { opacity: 0, transform: 'translate3d(0, -300px, 0)' },
-            enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+            from: { opacity: 0, transform: 'translate3d(0, -50em, 0) rotate(200deg)' },
+            enter: { opacity: 1, transform: 'translate3d(0, 6em, 0) rotate(-5deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         },
         'center-right': {
-            from: { opacity: 0, transform: 'translate3d(100px, 0, 0)' },
-            enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+            from: { opacity: 0, transform: 'translate3d(-50em, 12em, 0) rotate(0deg)' },
+            enter: { opacity: 1, transform: 'translate3d(-6em, 12em, 0) rotate(85deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         }
     }
 
     const newMiddle = middle.map((value, index) => {
+        let playerPosition = getPlayerPosition(playerId, index, ctx.numPlayers);
         return {
             card: value,
-            transition: transitions[getPlayerPosition(playerId, index, ctx.numPlayers)]
+            transition: transitions[playerPosition]
         }
     })
-
-
 
     const trans = useTransition(newMiddle, {
         from: ({card, transition}) => transition.from,
@@ -65,7 +64,7 @@ const Middle: FunctionComponent<IMiddle> = props => {
                     trans((style, card, _t, _i) => {
                         return <div className="transform-wrapper">
                                 <animated.img
-                                    className="middle-playing-card"
+                                    className='middle-playing-card'
                                     src={card.card.imgPath}
                                     alt={card.card.alt}
                                     key={card.card.alt}

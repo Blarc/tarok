@@ -20,7 +20,6 @@ const Board: FunctionComponent<IBoardProps> = ({ playerID, G, ctx, moves } : IBo
 
     const playerId = parseInt(playerID!);
 
-
     return (
         <div className="board">
             <Player

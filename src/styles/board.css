@@ -1,7 +1,7 @@
 .board {
   display: inline-grid;
-  grid-template-columns: [left-edge] 1fr [line2] 2fr [line3] 1fr [right-edge];
-  grid-template-rows: [top-edge] 1fr [line2] 2fr [line3] 1fr [bottom-edge];
+  grid-template-columns: [left-edge] 1fr [line2] 3fr [line3] 1fr [right-edge];
+  grid-template-rows: [top-edge] 1fr [line2] 3fr [line3] 2fr [bottom-edge];
   grid-template-areas:
     "top-left top top-right"
     "center-left center center-right"
@@ -26,9 +26,9 @@
 }
 
 .bottom {
+  margin-top: 5em;
   grid-area: bottom;
   display: flex;
-  font-size: 40px;
   animation-name: indicator-hero-turn;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
@@ -126,41 +126,32 @@
 /* Playing cards */
 
 .hero-playing-card {
-  max-height: 5em;
+  max-height: 13em;
   border-radius: 0.05em;
-  box-shadow: 0 0 0 0.2em #fff,
+  box-shadow: 0 0 0 0.5em #fff,
               0 0 0 0.22em #9a9a9a;
+  margin-left: -3em;
 }
 
 .hero-playing-card:hover {
-  box-shadow: 0 0 0 0.2em #fff,
-              0 0 0 0.25em #fffb11;
+  box-shadow: 0 0 0 0.5em #fff,
+              0 0 0 0.65em #ff0000;
 }
 
 /* card-wrapper necessary for drop-shadow to not cause blurring of the card images */
 
 .card-wrapper {
   filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));
-  margin-left: -1.2em;
 }
 
-/*.villain-playing-card {*/
-/*  max-height: 38vh;*/
-/*  filter: drop-shadow(40px -30px 4px rgb(0, 0, 0, 0.4));*/
-/*}*/
-
-/*.briscola-playing-card {*/
-/*  max-height: 35vh;*/
-/*  filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));*/
-/*}*/
-
 .middle-playing-card {
-  max-height: 35vh;
-  border-radius: 1em;
-  box-shadow: 0 0 0 0.2em #fff,
+  max-height: 15em;
+  border-radius: 0.05em;
+  box-shadow: 0 0 0 0.5em #fff,
               0 0 0 0.22em #9a9a9a;
-  filter: drop-shadow(4px -4px 1px rgb(0, 0, 0, 0.8));
+  filter: drop-shadow(3px -3px 1px rgba(0, 0, 0, 0.8));
   margin: 0px 5px;
+  position: absolute;
 }
 
 button {

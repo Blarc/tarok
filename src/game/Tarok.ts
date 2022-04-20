@@ -3,7 +3,6 @@ import {IPlayer} from "../entities/Player";
 import {ICard} from "../entities/Card";
 import {deck} from "../entities/Deck";
 import {TurnOrder} from "boardgame.io/core";
-import middle from "../components/Middle";
 
 export interface GameState {
     turn: number;
@@ -59,13 +58,11 @@ export const Tarok: Game<GameState> = {
             moves: {
                 playCard: (G, ctx, index, card) => {
                     let playerID = parseInt(ctx.currentPlayer);
-                    console.log(playerID)
                     let currentPlayer: IPlayer = G.players[playerID];
                     currentPlayer.cards.splice(index, 1);
                     G.middle[playerID] = card;
                     console.log('playCard');
-                    // ctx.events?.endTurn();
-
+                    ctx.events?.endTurn();
                 }
             },
             next: 'evaluate'
