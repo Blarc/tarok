@@ -8,8 +8,8 @@ export interface GameState {
     turn: number;
     players: IPlayer[];
     middle: ICard[];
+    previousMiddle: ICard[];
     talon: ICard[];
-    firstThrower: number;
 }
 
 export const Tarok: Game<GameState> = {
@@ -19,8 +19,8 @@ export const Tarok: Game<GameState> = {
         turn: 0,
         players: [],
         middle: Array(ctx.numPlayers),
+        previousMiddle: Array(ctx.numPlayers),
         talon: [],
-        firstThrower: 0
     }),
 
     phases: {
@@ -60,6 +60,7 @@ export const Tarok: Game<GameState> = {
                     let playerID = parseInt(ctx.currentPlayer);
                     let currentPlayer: IPlayer = G.players[playerID];
                     currentPlayer.cards.splice(index, 1);
+                    G.previousMiddle = [...G.middle]
                     G.middle[playerID] = card;
                     console.log('playCard');
                     ctx.events?.endTurn();

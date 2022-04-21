@@ -154,6 +154,22 @@
   position: absolute;
 }
 
+.middle-playing-card-bottom {
+  transform: translate3d(0, 15em, 0) rotate(0deg);
+}
+
+.middle-playing-card-center-left {
+  transform: translate3d(50em, 12em, 0) rotate(0deg)
+}
+
+.middle-playing-card-top {
+  transform: translate3d(0, -50em, 0) rotate(200deg)
+}
+
+.middle-playing-card-center-right {
+ transform: translate3d(-4em, 13em, 0) rotate(90deg)
+}
+
 button {
   font-family: "Cairo", Georgia, sans-serif;
 }

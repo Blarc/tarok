@@ -1,3 +1,4 @@
+import {Ctx} from "boardgame.io";
 
 export function getPlayerPosition(
     playerId: number,
@@ -10,5 +11,14 @@ export function getPlayerPosition(
         return positions[numberOfPlayers + playerPositionId];
     }
     return positions[playerPositionId];
+}
 
+export function getPreviousPlayer(
+    ctx: Ctx
+) {
+    let playerId = parseInt(ctx.currentPlayer);
+    if (playerId === 0) {
+        return ctx.numPlayers - 1;
+    }
+    return playerId - 1;
 }

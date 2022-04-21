@@ -11,10 +11,13 @@ export interface IMiddle {
 }
 
 const Middle: FunctionComponent<IMiddle> = props => {
-
-    const playerId = props.playerId
-    const { middle } = props.gameData;
     const ctx = props.ctx;
+    const playerId = props.playerId
+    const { middle } = props.gameData
+    const { previousMiddle } = props.gameData
+
+    console.log(previousMiddle)
+    console.log(middle)
 
     const transitions: {[key: string]: {
             from: {opacity: number, transform: string},
@@ -23,12 +26,12 @@ const Middle: FunctionComponent<IMiddle> = props => {
         }} = {
         'bottom': {
             from: { opacity: 0, transform: 'translate3d(0, 24em, 0) rotate(210deg)' },
-            enter: { opacity: 1, transform: 'translate3d(0, 16em, 0) rotate(5deg)' },
+            enter: { opacity: 1, transform: 'translate3d(0, 16em, 0) rotate(0deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         },
         'center-left': {
             from: { opacity: 0, transform: 'translate3d(50em, 12em, 0) rotate(0deg)' },
-            enter: { opacity: 1, transform: 'translate3d(6em, 12em, 0) rotate(95deg)' },
+            enter: { opacity: 1, transform: 'translate3d(6em, 12em, 0) rotate(90deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         },
         'top': {
@@ -37,14 +40,37 @@ const Middle: FunctionComponent<IMiddle> = props => {
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         },
         'center-right': {
-            from: { opacity: 0, transform: 'translate3d(-50em, 12em, 0) rotate(0deg)' },
-            enter: { opacity: 1, transform: 'translate3d(-6em, 12em, 0) rotate(85deg)' },
+            from: { opacity: 1, transform: 'translate3d(-6em, 12em, 0) rotate(90deg)' },
+            enter: { opacity: 1, transform: 'translate3d(-6em, 12em, 0) rotate(90deg)' },
+            // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
+        },
+        'bottom-0': {
+            from: { opacity: 1, transform: 'translate3d(0, 16em, 0) rotate(0deg)' },
+            enter: { opacity: 1, transform: 'translate3d(0, 16em, 0) rotate(0deg)' },
+            // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
+        },
+        'center-left-0': {
+            from: { opacity: 1, transform: 'translate3d(6em, 12em, 0) rotate(90deg)' },
+            enter: { opacity: 1, transform: 'translate3d(6em, 12em, 0) rotate(90deg)' },
+            // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
+        },
+        'top-0': {
+            from: { opacity: 1, transform: 'translate3d(0, 6em, 0) rotate(-5deg)' },
+            enter: { opacity: 1, transform: 'translate3d(0, 6em, 0) rotate(-5deg)' },
+            // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
+        },
+        'center-right-0': {
+            from: { opacity: 1, transform: 'translate3d(-6em, 12em, 0) rotate(90deg)' },
+            enter: { opacity: 1, transform: 'translate3d(-6em, 12em, 0) rotate(90deg)' },
             // leave: { opacity: 0, transform: 'translate3d(0, 0, 0)' }
         }
     }
 
     const newMiddle = middle.map((value, index) => {
         let playerPosition = getPlayerPosition(playerId, index, ctx.numPlayers);
+        if (previousMiddle[index] !== undefined) {
+            playerPosition += '-0'
+        }
         return {
             card: value,
             transition: transitions[playerPosition]
@@ -57,20 +83,23 @@ const Middle: FunctionComponent<IMiddle> = props => {
         // leave: ({card, transition}) => transition.leave,
     });
 
+    console.log(playerId)
+
     return (
         <>
             <div className="center">
                 {
-                    trans((style, card, _t, _i) => {
+                    trans((style, card, _t, index) => {
                         return <div className="transform-wrapper">
-                                <animated.img
-                                    className='middle-playing-card'
-                                    src={card.card.imgPath}
-                                    alt={card.card.alt}
-                                    key={card.card.alt}
-                                    style={style}
-                                />
-                            </div>
+                            <animated.img
+                                className={`middle-playing-card`}
+                                id={`mid-card-${index}`}
+                                src={card.card.imgPath}
+                                alt={card.card.alt}
+                                key={card.card.alt}
+                                style={style}
+                            />
+                        </div>
                     })
                 }
             </div>
