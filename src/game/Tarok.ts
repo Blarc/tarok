@@ -12,7 +12,7 @@ export interface GameState {
     talon: ICard[];
 }
 
-export const Tarok: Game<GameState> = {
+const Tarok: Game<GameState> = {
     name: 'Tarok',
 
     setup: (ctx) => ({
@@ -84,3 +84,5 @@ export const Tarok: Game<GameState> = {
     minPlayers: 3,
     maxPlayers: 4,
 }
+
+export default Tarok;
